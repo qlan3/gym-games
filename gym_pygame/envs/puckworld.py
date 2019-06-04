@@ -6,7 +6,7 @@ from gym import spaces
 from gym.envs.classic_control import rendering
 from ple import PLE
 
-from base import BaseEnv
+from gym_pygame.envs.base import BaseEnv
 
 
 class PuckWorldEnv(BaseEnv):

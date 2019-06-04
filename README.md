@@ -1,5 +1,5 @@
 # Gym PyGame
-This is a gym version of PyGame learning environment. The default observation is a non-visual state representation of the game.
+This is a gym version of PyGame Learning Environment (PLE). The default observation is a non-visual state representation of the game.
 
 ## Environments
 
@@ -7,7 +7,7 @@ This is a gym version of PyGame learning environment. The default observation is
 - FlappyBird-v0
 - Pixelcopter-v0
 - PuckWorld-v0
-- Pong-v0
+- PongPLE-v0 (PLE version of Pong)
 
 A detailed explaination of games can be find [here](https://pygame-learning-environment.readthedocs.io/en/latest/user/games.html).
 

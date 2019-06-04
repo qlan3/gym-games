@@ -6,10 +6,10 @@ from gym import spaces
 from gym.envs.classic_control import rendering
 from ple import PLE
 
-from base import BaseEnv
+from gym_pygame.envs.base import BaseEnv
 
 
-class PongEnv(BaseEnv):
+class PongPLEEnv(BaseEnv):
   def __init__(self, normalize=False, display=False, **kwargs):
     self.game_name = 'Pong'
     self.init(normalize, display, **kwargs)
@@ -20,7 +20,7 @@ class PongEnv(BaseEnv):
     return state_normal
 
 if __name__ == '__main__':
-  env = PongEnv(normalize=True)
+  env = PongPLEEnv(normalize=True)
   env.seed(0)
   print('Action space:', env.action_space)
   print('Action set:', env.action_set)

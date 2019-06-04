@@ -9,7 +9,13 @@ class RandomAgent(object):
     return self.action_space.sample()
 
 if __name__ == '__main__':
-  env = gym.make('Catcher-v0')
+  game = 'Catcher-v0'
+  game = 'FlappyBird-v0'
+  game = 'Pixelcopter-v0'
+  game = 'PuckWorld-v0'
+  game = 'PongPLE-v0'
+
+  env = gym.make(game)
   env.seed(0)
 
   print('Action space:', env.action_space)
@@ -19,7 +25,7 @@ if __name__ == '__main__':
 
   for i in range(1):
     ob = env.reset()
-    while True:
+    for _ in range(1000):
       action = env.action_space.sample()
       ob, reward, done, _ = env.step(action)
       env.render()
