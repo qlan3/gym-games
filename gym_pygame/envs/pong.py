@@ -9,21 +9,18 @@ from ple import PLE
 from base import BaseEnv
 
 
-class CatcherEnv(BaseEnv):
+class PongEnv(BaseEnv):
   def __init__(self, normalize=False, display=False, **kwargs):
-    self.game_name = 'Catcher'
+    self.game_name = 'Pong'
     self.init(normalize, display, **kwargs)
     
-  def get_ob_normalize(self, state):
-    state_normal = self.get_ob(state)
-    state_normal[0] = (state_normal[0] - 26) / 26
-    state_normal[1] = (state_normal[1]) / 8
-    state_normal[2] = (state_normal[2] - 26) / 26
-    state_normal[3] = (state_normal[3] - 20) / 45
+  def get_ob_normalize(cls, state):
+    state_normal = cls.get_ob(state)
+    # TODO
     return state_normal
 
 if __name__ == '__main__':
-  env = CatcherEnv(normalize=True)
+  env = PongEnv(normalize=True)
   env.seed(0)
   print('Action space:', env.action_space)
   print('Action set:', env.action_set)
@@ -36,11 +33,12 @@ if __name__ == '__main__':
     while True:
       action = env.action_space.sample()
       ob, reward, done, _ = env.step(action)
-      # env.render('rgb_array')
       env.render('human')
+      #env.render('rgb_array')
       print('Observation:', ob)
       print('Reward:', reward)
       print('Done:', done)
+      # break
       if done:
         break
   env.close()

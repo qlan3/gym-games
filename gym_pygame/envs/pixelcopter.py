@@ -9,21 +9,18 @@ from ple import PLE
 from base import BaseEnv
 
 
-class CatcherEnv(BaseEnv):
+class PixelcopterEnv(BaseEnv):
   def __init__(self, normalize=False, display=False, **kwargs):
-    self.game_name = 'Catcher'
+    self.game_name = 'Pixelcopter'
     self.init(normalize, display, **kwargs)
     
   def get_ob_normalize(self, state):
     state_normal = self.get_ob(state)
-    state_normal[0] = (state_normal[0] - 26) / 26
-    state_normal[1] = (state_normal[1]) / 8
-    state_normal[2] = (state_normal[2] - 26) / 26
-    state_normal[3] = (state_normal[3] - 20) / 45
+    # TODO
     return state_normal
 
 if __name__ == '__main__':
-  env = CatcherEnv(normalize=True)
+  env = PixelcopterEnv(normalize=True)
   env.seed(0)
   print('Action space:', env.action_space)
   print('Action set:', env.action_set)
@@ -31,7 +28,7 @@ if __name__ == '__main__':
   print('Obsevation space high:', env.observation_space.high)
   print('Obsevation space low:', env.observation_space.low)
 
-  for i in range(1):
+  for i in range(10):
     ob = env.reset()
     while True:
       action = env.action_space.sample()

@@ -1,5 +1,15 @@
-# gym-pygame
-This is a gym version of PyGame learning environment.
+# Gym PyGame
+This is a gym version of PyGame learning environment. The default observation is a non-visual state representation of the game.
+
+## Environments
+
+- Catcher-v0
+- FlappyBird-v0
+- Pixelcopter-v0
+- PuckWorld-v0
+- Pong-v0
+
+A detailed explaination of games can be find [here](https://pygame-learning-environment.readthedocs.io/en/latest/user/games.html).
 
 ## Installation
 
@@ -27,17 +37,16 @@ Please read the instruction [here](https://github.com/openai/gym).
     cd PyGame-Learning-Environment/
     pip install -e .
 
-### Gym PyGame
+### gym-pygame
 
     git clone https://github.com/qlan3/gym-pygame
     cd gym-pygame/
     pip install -e .
 
-## Test
+## Example
 Run ``python test.py``.
 
-## Reference
+## References
+- [gym](https://github.com/openai/gym/tree/master/)
 - [gym-ple](https://github.com/lusob/gym-ple)
-- [gym docs](https://github.com/openai/gym/tree/master/docs)
-- [gym-soccer](https://github.com/openai/gym-soccer/blob/master/gym_soccer/)
 - [SRNN](https://github.com/VincentLiu3/SRNN)
