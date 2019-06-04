@@ -1,0 +1,1 @@
+from gym_pygame.envs.catcher import CatcherEnv
