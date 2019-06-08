@@ -3,7 +3,6 @@ import importlib
 import numpy as np
 import gym
 from gym import spaces
-from gym.envs.classic_control import rendering
 from ple import PLE
 
 
@@ -62,6 +61,7 @@ class BaseEnv(gym.Env):
     if mode == 'rgb_array':
       return img
     elif mode == 'human':
+      from gym.envs.classic_control import rendering
       if self.viewer is None:
         self.viewer = rendering.SimpleImageViewer()
       self.viewer.imshow(img)

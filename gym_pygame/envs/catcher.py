@@ -10,7 +10,7 @@ from gym_pygame.envs.base import BaseEnv
 
 
 class CatcherEnv(BaseEnv):
-  def __init__(self, normalize=False, display=False, **kwargs):
+  def __init__(self, normalize=True, display=False, **kwargs):
     self.game_name = 'Catcher'
     self.init(normalize, display, **kwargs)
     
