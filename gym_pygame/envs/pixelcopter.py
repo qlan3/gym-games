@@ -3,7 +3,6 @@ import importlib
 import numpy as np
 import gym
 from gym import spaces
-from gym.envs.classic_control import rendering
 from ple import PLE
 
 from gym_pygame.envs.base import BaseEnv
