@@ -1,16 +1,16 @@
 # Gym Games
-This is a gym version of various games for reinforcenment learning. The default observation is a non-visual state representation of the game.
+This is a gym version of various games for reinforcenment learning. For [PyGame learning environment](https://pygame-learning-environment.readthedocs.io/en/latest/user/games.html), the default observation is a non-visual state representation of the game. For [MinAtar](https://github.com/kenjyoung/MinAtar), the default observation is a visual input of the game.
 
 ## Environments
 
-- [PyGame learning environment](https://pygame-learning-environment.readthedocs.io/en/latest/user/games.html):
+- PyGame learning environment:
   - Catcher-PLE-v0
   - FlappyBird-PLE-v0
   - Pixelcopter-PLE-v0
   - PuckWorld-PLE-v0
   - Pong-PLE-v0
 
-- [MinAtar](https://github.com/kenjyoung/MinAtar):
+- MinAtar:
   - Asterix-MinAtar-v0
   - Breakout-MinAtar-v0
   - Freeway-MinAtar-v0
