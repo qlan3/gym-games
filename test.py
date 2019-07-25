@@ -1,4 +1,5 @@
 import gym
+import gym_minatar
 import gym_pygame
 
 class RandomAgent(object):
@@ -9,11 +10,17 @@ class RandomAgent(object):
     return self.action_space.sample()
 
 if __name__ == '__main__':
-  game = 'Catcher-v0'
-  game = 'FlappyBird-v0'
-  game = 'Pixelcopter-v0'
-  game = 'PuckWorld-v0'
-  game = 'PongPLE-v0'
+  game = 'Catcher-PLE-v0'
+  game = 'FlappyBird-PLE-v0'
+  game = 'Pixelcopter-PLE-v0'
+  game = 'PuckWorld-PLE-v0'
+  game = 'Pong-PLE-v0'
+  
+  game = 'Asterix-MinAtar-v0'
+  game = 'Breakout-MinAtar-v0'
+  game = 'Freeway-MinAtar-v0'
+  game = 'Seaquest-MinAtar-v0'
+  game = 'Space_invaders-MinAtar-v0'
 
   env = gym.make(game)
   env.seed(0)
@@ -25,10 +32,12 @@ if __name__ == '__main__':
 
   for i in range(1):
     ob = env.reset()
-    for _ in range(1000):
+    for _ in range(10):
       action = env.action_space.sample()
       ob, reward, done, _ = env.step(action)
-      env.render()
+      env.render() # default render mode is 'human'
+      # env.render('human')
+      # img = env.render('rgb_array')
       print('Observation:', ob)
       print('Reward:', reward)
       print('Done:', done)

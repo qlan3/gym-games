@@ -3,23 +3,18 @@ import importlib
 import numpy as np
 import gym
 from gym import spaces
-from ple import PLE
 
-from gym_pygame.envs.base import BaseEnv
+from gym_minatar.envs.base import BaseEnv
 
+class Space_invadersEnv(BaseEnv):
+  def __init__(self, display_time=50, **kwargs):
+    self.game_name = 'space_invaders'
+    self.display_time = display_time
+    self.init(**kwargs)
 
-class PongPLEEnv(BaseEnv):
-  def __init__(self, normalize=False, display=False, **kwargs):
-    self.game_name = 'Pong'
-    self.init(normalize, display, **kwargs)
-    
-  def get_ob_normalize(cls, state):
-    state_normal = cls.get_ob(state)
-    # TODO
-    return state_normal
 
 if __name__ == '__main__':
-  env = PongPLEEnv(normalize=True)
+  env = Space_invadersEnv()
   env.seed(0)
   print('Action space:', env.action_space)
   print('Action set:', env.action_set)
@@ -32,12 +27,9 @@ if __name__ == '__main__':
     while True:
       action = env.action_space.sample()
       ob, reward, done, _ = env.step(action)
-      env.render('human')
-      #env.render('rgb_array')
       print('Observation:', ob)
       print('Reward:', reward)
       print('Done:', done)
-      # break
       if done:
         break
   env.close()

@@ -1,15 +1,21 @@
-# Gym PyGame
-This is a gym version of PyGame Learning Environment (PLE). The default observation is a non-visual state representation of the game.
+# Gym Games
+This is a gym version of various games for reinforcenment learning. The default observation is a non-visual state representation of the game.
 
 ## Environments
 
-- Catcher-v0
-- FlappyBird-v0
-- Pixelcopter-v0
-- PuckWorld-v0
-- PongPLE-v0 (PLE version of Pong)
+- [PyGame learning environment](https://pygame-learning-environment.readthedocs.io/en/latest/user/games.html):
+  - Catcher-PLE-v0
+  - FlappyBird-PLE-v0
+  - Pixelcopter-PLE-v0
+  - PuckWorld-PLE-v0
+  - Pong-PLE-v0
 
-A detailed explaination of games can be find [here](https://pygame-learning-environment.readthedocs.io/en/latest/user/games.html).
+- [MinAtar](https://github.com/kenjyoung/MinAtar):
+  - Asterix-MinAtar-v0
+  - Breakout-MinAtar-v0
+  - Freeway-MinAtar-v0
+  - Seaquest-MinAtar-v0
+  - Space_invaders-MinAtar-v0
 
 ## Installation
 
@@ -22,14 +28,14 @@ Please read the instruction [here](https://github.com/openai/gym).
 - On OSX:
 
     brew install sdl sdl_ttf sdl_image sdl_mixer portmidi
-    pip3 install pygame
+    pip install pygame
 
 - On Ubuntu:
 
-    sudo apt-get install -y python3-pygame
+    sudo apt-get -y install python-pygame
+    pip install pygame
 
 - Others: Please read the instruction [here](http://www.pygame.org/wiki/GettingStarted#Pygame%20Installation).
-
 
 ### PLE
 
@@ -37,11 +43,13 @@ Please read the instruction [here](https://github.com/openai/gym).
     cd PyGame-Learning-Environment/
     pip install -e .
 
-### gym-pygame
+## MinAtar
 
-    git clone https://github.com/qlan3/gym-pygame
-    cd gym-pygame/
-    pip install -e .
+    pip install git+https://github.com/kenjyoung/MinAtar.git
+
+### gym-games
+
+    pip install git+https://github.com/qlan3/gym-games.git
 
 ## Example
 Run ``python test.py``.
@@ -50,3 +58,4 @@ Run ``python test.py``.
 - [gym](https://github.com/openai/gym/tree/master/)
 - [gym-ple](https://github.com/lusob/gym-ple)
 - [SRNN](https://github.com/VincentLiu3/SRNN)
+- [MinAtar](https://github.com/kenjyoung/MinAtar)
