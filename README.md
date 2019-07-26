@@ -1,5 +1,9 @@
 # Gym Games
-This is a gym version of various games for reinforcenment learning. For [PyGame learning environment](https://pygame-learning-environment.readthedocs.io/en/latest/user/games.html), the default observation is a non-visual state representation of the game. For [MinAtar](https://github.com/kenjyoung/MinAtar), the default observation is a visual input of the game.
+This is a gym version of various games for reinforcenment learning. 
+
+For [PyGame learning environment](https://pygame-learning-environment.readthedocs.io/en/latest/user/games.html), the default observation is a non-visual state representation of the game. 
+
+For [MinAtar](https://github.com/kenjyoung/MinAtar), the default observation is a visual input of the game.
 
 ## Environments
 
@@ -49,7 +53,7 @@ Please read the instruction [here](https://github.com/openai/gym).
 
 ### gym-games
 
-    pip install git+https://github.com/qlan3/gym-games.git
+    pip install -e git+https://github.com/qlan3/gym-games.git#egg=gym-games
 
 ## Example
 Run ``python test.py``.
