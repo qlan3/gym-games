@@ -1,0 +1,5 @@
+ple.egg==info
+numpy==1.16.4
+MinAtar==1.0.4
+gym==0.13.0
+setuptools==41.0.1
