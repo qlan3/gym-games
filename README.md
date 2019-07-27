@@ -1,7 +1,8 @@
 # Gym Games
-This is a gym version of various games for reinforcenment learning. 
 
-For [PyGame learning environment](https://pygame-learning-environment.readthedocs.io/en/latest/user/games.html), the default observation is a non-visual state representation of the game. 
+This is a gym compatible version of various games for reinforcenment learning.
+
+For [PyGame Learning Environment](https://pygame-learning-environment.readthedocs.io/en/latest/user/games.html), the default observation is a non-visual state representation of the game. 
 
 For [MinAtar](https://github.com/kenjyoung/MinAtar), the default observation is a visual input of the game.
 
@@ -27,7 +28,7 @@ For [MinAtar](https://github.com/kenjyoung/MinAtar), the default observation is 
 
 Please read the instruction [here](https://github.com/openai/gym).
 
-### PyGame
+### Pygame
 
 - On OSX:
 
@@ -41,7 +42,7 @@ Please read the instruction [here](https://github.com/openai/gym).
 
 - Others: Please read the instruction [here](http://www.pygame.org/wiki/GettingStarted#Pygame%20Installation).
 
-### PLE
+### PyGame Learning Environment
 
     pip install git+https://github.com/ntasfi/PyGame-Learning-Environment.git
 
@@ -49,20 +50,36 @@ Please read the instruction [here](https://github.com/openai/gym).
 
     pip install git+https://github.com/kenjyoung/MinAtar.git
 
-### gym-games
+### Gym-games
 
   - Install from source:
         
         pip install git+https://github.com/qlan3/gym-games.git
 
-  - Install it from PyPi:
+  - Install from PyPi:
 
         pip install gym-games
 
 ## Example
+
 Run ``python test.py``.
 
+
+## Cite
+
+Please use this bibtex to cite this repo:
+
+    @misc{gym-games,
+    author = {Qingfeng, Lan},
+    title = {Gym Compatible Games for Reinforcenment Learning},
+    year = {2019},
+    publisher = {GitHub},
+    journal = {GitHub Repository},
+    howpublished = {\url{https://github.com/qlan3/gym-games}}
+    }
+
 ## References
+
 - [gym](https://github.com/openai/gym/tree/master/)
 - [gym-ple](https://github.com/lusob/gym-ple)
 - [SRNN](https://github.com/VincentLiu3/SRNN)
