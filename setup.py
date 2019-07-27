@@ -1,8 +1,8 @@
 import os
 from setuptools import setup, find_packages
 
-def read(fname):
-  return open(os.path.join(os.path.dirname(__file__), fname)).read()
+with open('README.md', 'r') as fh:
+  long_description = fh.read()
 
 setup(
   name='gym-games',
@@ -13,7 +13,7 @@ setup(
   author='qlan3',
   author_email='qlan3@ualberta.ca',
   license='MIT',
-  long_description=read('README.md'),
+  long_description=long_description,
   packages=find_packages(),
   python_requires='>=3.5',
   install_requires=[
