@@ -6,7 +6,7 @@ with open('README.md', 'r') as fh:
 
 setup(
   name='gym-games',
-  version='1.0.2',
+  version='1.0.3',
   keywords=['AI', 'Reinforcement Learning', 'Games', 'Pygame', 'MinAtar'],
   description='This is a gym version of various games for reinforcenment learning.',
   url='https://github.com/qlan3/gym-games',
