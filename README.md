@@ -31,21 +31,19 @@ Please read the instruction [here](https://github.com/openai/gym).
 
 - On OSX:
 
-    brew install sdl sdl_ttf sdl_image sdl_mixer portmidi
-    pip install pygame
+      brew install sdl sdl_ttf sdl_image sdl_mixer portmidi
+      pip install pygame
 
 - On Ubuntu:
 
-    sudo apt-get -y install python-pygame
-    pip install pygame
+      sudo apt-get -y install python-pygame
+      pip install pygame
 
 - Others: Please read the instruction [here](http://www.pygame.org/wiki/GettingStarted#Pygame%20Installation).
 
 ### PLE
 
-    git clone https://github.com/ntasfi/PyGame-Learning-Environment.git
-    cd PyGame-Learning-Environment/
-    pip install -e .
+    pip install git+https://github.com/ntasfi/PyGame-Learning-Environment.git
 
 ## MinAtar
 
@@ -53,7 +51,13 @@ Please read the instruction [here](https://github.com/openai/gym).
 
 ### gym-games
 
-    pip install -e git+https://github.com/qlan3/gym-games.git#egg=gym-games
+  - Install from source:
+        
+        pip install git+https://github.com/qlan3/gym-games.git
+
+  - Install it from PyPi:
+
+        pip install gym-games
 
 ## Example
 Run ``python test.py``.

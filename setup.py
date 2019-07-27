@@ -5,7 +5,7 @@ def read(fname):
   return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(
-  name='gym_games',
+  name='gym-games',
   version='1.0.2',
   keywords=['AI', 'Reinforcement Learning', 'Games', 'Pygame', 'MinAtar'],
   description='This is a gym version of various games for reinforcenment learning.',
