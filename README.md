@@ -71,7 +71,7 @@ Please use this bibtex to cite this repo:
 
     @misc{gym-games,
     author = {Qingfeng, Lan},
-    title = {Gym Compatible Games for Reinforcenment Learning},
+    title = {Gym Compatible Games for Reinforcement Learning},
     year = {2019},
     publisher = {GitHub},
     journal = {GitHub Repository},
