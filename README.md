@@ -1,6 +1,6 @@
 # Gym Games
 
-This is a gym compatible version of various games for reinforcenment learning.
+This is a gym compatible version of various games for reinforcement learning.
 
 For [PyGame Learning Environment](https://pygame-learning-environment.readthedocs.io/en/latest/user/games.html), the default observation is a non-visual state representation of the game. 
 
