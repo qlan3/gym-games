@@ -69,14 +69,16 @@ Run ``python test.py``.
 
 Please use this bibtex to cite this repo:
 
-    @misc{gym-games,
-    author = {Qingfeng, Lan},
-    title = {Gym Compatible Games for Reinforcenment Learning},
-    year = {2019},
-    publisher = {GitHub},
-    journal = {GitHub Repository},
-    howpublished = {\url{https://github.com/qlan3/gym-games}}
-    }
+```
+@misc{gym-games,
+  author = {Lan, Qingfeng},
+  title = {Gym Compatible Games for Reinforcenment Learning},
+  year = {2019},
+  publisher = {GitHub},
+  journal = {GitHub Repository},
+  howpublished = {\url{https://github.com/qlan3/gym-games}}
+}
+```
 
 ## References
 
