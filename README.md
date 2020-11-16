@@ -1,6 +1,6 @@
 # Gym Games
 
-This is a gym compatible version of various games for reinforcenment learning.
+This is a gym compatible version of various games for reinforcement learning.
 
 For [PyGame Learning Environment](https://pygame-learning-environment.readthedocs.io/en/latest/user/games.html), the default observation is a non-visual state representation of the game. 
 
@@ -72,7 +72,7 @@ Please use this bibtex to cite this repo:
 ```
 @misc{gym-games,
   author = {Lan, Qingfeng},
-  title = {Gym Compatible Games for Reinforcenment Learning},
+  title = {Gym Compatible Games for Reinforcement Learning},
   year = {2019},
   publisher = {GitHub},
   journal = {GitHub Repository},
