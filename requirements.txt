@@ -3,3 +3,4 @@ setuptools==41.0.1
 MinAtar==1.0.4
 numpy==1.16.4
 gym==0.13.0
+pygame=1.9.6

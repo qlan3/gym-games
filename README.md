@@ -33,12 +33,12 @@ Please read the instruction [here](https://github.com/openai/gym).
 - On OSX:
 
       brew install sdl sdl_ttf sdl_image sdl_mixer portmidi
-      pip install pygame
+      pip install pygame==1.9.6
 
 - On Ubuntu:
 
       sudo apt-get -y install python-pygame
-      pip install pygame
+      pip install pygame==1.9.6
 
 - Others: Please read the instruction [here](http://www.pygame.org/wiki/GettingStarted#Pygame%20Installation).
 
@@ -52,13 +52,7 @@ Please read the instruction [here](https://github.com/openai/gym).
 
 ### Gym-games
 
-  - Install from source:
-        
-        pip install git+https://github.com/qlan3/gym-games.git
-
-  - Install from PyPi:
-
-        pip install gym-games
+    pip install git+https://github.com/qlan3/gym-games.git
 
 ## Example
 
