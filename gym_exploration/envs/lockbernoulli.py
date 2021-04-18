@@ -13,18 +13,12 @@ class LockBernoulliEnv(gym.Env):
   def __init__(self):
     self.init()
 
-  def init(self, horizon=2, dimension=0, tabular=False, switch=0.0):
-    self.horizon = horizon
+  def init(self, dimension=0, switch=0.0, horizon=2):
     self.dimension = dimension
-    self.tabular = tabular
     self.switch = switch
-
-    self.state_space = MultiBinary((self.horizon+1)*3)
-    if self.tabular:
-      self.observation_space = MultiBinary((self.horizon+1)*3)
-    else:
-      self.observation_space = Box(low=0.0, high=1.0, shape=(3+self.dimension,), dtype=np.float32)
-    setattr(self.observation_space, 'n', 3+self.dimension)
+    self.horizon = horizon
+    self.n = self.dimension+3
+    self.observation_space = Box(low=0.0, high=1.0, shape=(self.n,), dtype=np.float32)
     self.action_space = Discrete(4)
     self.seed()
 
@@ -35,16 +29,13 @@ class LockBernoulliEnv(gym.Env):
     return (obs)
 
   def make_obs(self, s):
-    if self.tabular:
-      return np.array([s, self.h])
-    else:
-      new_x = np.zeros((self.observation_space.n,))
-      new_x[s] = 1
-      new_x[3:] = self.np_random.binomial(1, 0.5, (self.dimension,))
-      return new_x
+    new_x = np.zeros((self.n,))
+    new_x[s] = 1
+    new_x[3:] = self.np_random.binomial(1, 0.5, (self.dimension,))
+    return new_x
 
   def step(self,action):
-    assert self.h < self.horizon, '[LOCK] Exceeded horizon!'
+    assert self.h < self.horizon, 'Exceeded horizon!'
     if self.h == self.horizon-1:
       done = True
       r = self.np_random.binomial(1, 0.5)
@@ -102,13 +93,19 @@ class LockBernoulliEnv(gym.Env):
 if __name__ == '__main__':
   env = LockBernoulliEnv()
   env.seed(0)
+  env_cfg = {"horizon":10, "dimension":10, "switch":0.1}
+  env.init(**env_cfg)
   print('Action space:', env.action_space)
   print('Obsevation space:', env.observation_space)
-  print('Obsevation space high:', env.observation_space.high)
-  print('Obsevation space low:', env.observation_space.low)
+  try:
+    print('Obsevation space high:', env.observation_space.high)
+    print('Obsevation space low:', env.observation_space.low)
+  except:
+    pass
 
   for i in range(1):
     ob = env.reset()
+    print('Observation:', ob)
     while True:
       action = env.action_space.sample()
       ob, reward, done, _ = env.step(action)
