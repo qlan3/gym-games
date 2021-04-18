@@ -24,10 +24,17 @@ if __name__ == '__main__':
   game = 'Space_invaders-MinAtar-v0'
 
   game = 'NChain-v1'
-  game = 'LockBernoulli-v0'
-  game = 'LockGaussian-v0'
+  # game = 'LockBernoulli-v0'
+  # game = 'LockGaussian-v0'
 
   env = gym.make(game)
+  if game in ['NChain-v1', 'LockBernoulli-v0', 'LockGaussian-v0']:
+    game_cfg = {
+      'NChain-v1': {'n':5},
+      'LockBernoulli-v0': {'horizon':10, 'dimension':10, 'switch':0.1},
+      'LockGaussian-v0': {'horizon':9, 'dimension':9, 'tabular':False, 'switch':0.1, 'noise':0.1}
+    }
+    env.init(**game_cfg[game])
   env.seed(0)
 
   print('Action space:', env.action_space)

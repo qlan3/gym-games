@@ -1,5 +1,6 @@
 import gym
 import numpy as np
+from gym.utils import seeding
 from gym.spaces import MultiBinary, Discrete, Box
 
 
@@ -25,8 +26,7 @@ class LockBernoulliEnv(gym.Env):
       self.observation_space = Box(low=0.0, high=1.0, shape=(3+self.dimension,), dtype=np.float32)
     setattr(self.observation_space, 'n', 3+self.dimension)
     self.action_space = Discrete(4)
-    self.opt_a = np.random.randint(low=0, high=self.action_space.n, size=self.horizon)
-    self.opt_b = np.random.randint(low=0, high=self.action_space.n, size=self.horizon)
+    self.seed()
 
   def reset(self):
     self.h = 0
@@ -40,14 +40,14 @@ class LockBernoulliEnv(gym.Env):
     else:
       new_x = np.zeros((self.observation_space.n,))
       new_x[s] = 1
-      new_x[3:] = np.random.binomial(1, 0.5, (self.dimension,))
+      new_x[3:] = self.np_random.binomial(1, 0.5, (self.dimension,))
       return new_x
 
   def step(self,action):
     assert self.h < self.horizon, '[LOCK] Exceeded horizon!'
     if self.h == self.horizon-1:
       done = True
-      r = np.random.binomial(1, 0.5)
+      r = self.np_random.binomial(1, 0.5)
       if self.state == 0 and action == self.opt_a[self.h]:
         next_state = 0
       elif self.state == 0 and action == (self.opt_a[self.h]+1) % 4:
@@ -61,7 +61,7 @@ class LockBernoulliEnv(gym.Env):
     else:
       r = 0
       done = False
-      ber = np.random.binomial(1, self.switch)
+      ber = self.np_random.binomial(1, self.switch)
       if self.state == 0: # state A
         if action == self.opt_a[self.h]:
           next_state = ber
@@ -84,11 +84,13 @@ class LockBernoulliEnv(gym.Env):
     obs = self.make_obs(self.state)
     return obs, r, done, {}
 
-  def render(self,mode='human'):
+  def render(self, mode='human'):
     print(f'{chr(self.state+65)}{self.h}')
 
   def seed(self, seed=None):
-    np.random.seed(seed)
+    self.np_random, seed = seeding.np_random(seed)
+    self.opt_a = self.np_random.randint(low=0, high=self.action_space.n, size=self.horizon)
+    self.opt_b = self.np_random.randint(low=0, high=self.action_space.n, size=self.horizon)
     if hasattr(gym.spaces, 'prng'):
         gym.spaces.prng.seed(seed)
     return seed

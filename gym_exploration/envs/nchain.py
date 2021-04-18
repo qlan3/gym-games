@@ -1,6 +1,7 @@
 import gym
 from gym import spaces
 import numpy as np
+from gym.utils import seeding
 
 
 # Adapted from https://github.com/facebookresearch/RandomizedValueFunctions/blob/master/qlearn/envs/nchain.py
@@ -14,11 +15,13 @@ class NChainEnv(gym.Env):
   def __init__(self):
     self.state = 1  # Start at state s2
     self.action_space = spaces.Discrete(2)
+    self.seed()
     self.init()
     
   def init(self, n=10):
     self.n = n
     self.observation_space = spaces.Discrete(self.n)
+    setattr(self.observation_space, 'n', self.n)
     self.max_steps = n+8
   
   def reward(self, s, a):
@@ -54,6 +57,7 @@ class NChainEnv(gym.Env):
     return (v <= self.state).astype('float32')
   
   def seed(self, seed=None):
+    self.np_random, seed = seeding.np_random(seed)
     return seed
 
   def render(self, mode='human'):
@@ -67,8 +71,15 @@ if __name__ == '__main__':
   env = NChainEnv()
   env.seed(0)
   print('Action space:', env.action_space)
+  print('n:', env.n)
   print('Obsevation space:', env.observation_space)
-
+  print('Obsevation space n:', env.observation_space.n)
+  cfg = {'n':5}
+  env.init(**cfg)
+  print('New n:', env.n)
+  print('New obsevation space:', env.observation_space)
+  print('New obsevation space n:', env.observation_space.n)
+  
   for i in range(1):
     ob = env.reset()
     while True:
