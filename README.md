@@ -22,6 +22,11 @@ For [MinAtar](https://github.com/kenjyoung/MinAtar), the default observation is 
   - Seaquest-MinAtar-v0
   - Space_invaders-MinAtar-v0
 
+- Exploration games:
+  - NChain-v1
+  - LockBernoulli-v0
+  - LockGaussian-v0
+
 ## Installation
 
 ### Gym
@@ -80,3 +85,4 @@ Please use this bibtex to cite this repo:
 - [gym-ple](https://github.com/lusob/gym-ple)
 - [SRNN](https://github.com/VincentLiu3/SRNN)
 - [MinAtar](https://github.com/kenjyoung/MinAtar)
+- [Latent State Decoding](https://github.com/microsoft/StateDecoding)

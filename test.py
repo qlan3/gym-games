@@ -1,6 +1,7 @@
 import gym
 import gym_minatar
 import gym_pygame
+import gym_exploration
 
 class RandomAgent(object):
   def __init__(self, action_space):
@@ -22,13 +23,20 @@ if __name__ == '__main__':
   game = 'Seaquest-MinAtar-v0'
   game = 'Space_invaders-MinAtar-v0'
 
+  game = 'NChain-v1'
+  game = 'LockBernoulli-v0'
+  game = 'LockGaussian-v0'
+
   env = gym.make(game)
   env.seed(0)
 
   print('Action space:', env.action_space)
   print('Obsevation space:', env.observation_space)
-  print('Obsevation space high:', env.observation_space.high)
-  print('Obsevation space low:', env.observation_space.low)
+  try:
+    print('Obsevation space high:', env.observation_space.high)
+    print('Obsevation space low:', env.observation_space.low)
+  except:
+    pass
 
   for i in range(1):
     ob = env.reset()
