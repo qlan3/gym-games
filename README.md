@@ -26,7 +26,7 @@ For [MinAtar](https://github.com/kenjyoung/MinAtar), the default observation is 
   - NChain-v1
   - LockBernoulli-v0
   - LockGaussian-v0
-  - SparseMountainCarEnv-v0
+  - SparseMountainCar-v0
 
 ## Installation
 
