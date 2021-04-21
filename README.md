@@ -20,7 +20,7 @@ For [MinAtar](https://github.com/kenjyoung/MinAtar), the default observation is 
   - Breakout-MinAtar-v0
   - Freeway-MinAtar-v0
   - Seaquest-MinAtar-v0
-  - Space_invaders-MinAtar-v0
+  - SpaceInvaders-MinAtar-v0
 
 - Exploration games:
   - NChain-v1

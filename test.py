@@ -21,7 +21,7 @@ if __name__ == '__main__':
   game = 'Breakout-MinAtar-v0'
   game = 'Freeway-MinAtar-v0'
   game = 'Seaquest-MinAtar-v0'
-  game = 'Space_invaders-MinAtar-v0'
+  game = 'SpaceInvaders-MinAtar-v0'
 
   game = 'NChain-v1'
   game = 'LockBernoulli-v0'

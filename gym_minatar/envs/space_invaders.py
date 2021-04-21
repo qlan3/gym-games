@@ -6,15 +6,15 @@ from gym import spaces
 
 from gym_minatar.envs.base import BaseEnv
 
-class Space_invadersEnv(BaseEnv):
+class SpaceInvadersEnv(BaseEnv):
   def __init__(self, display_time=50, **kwargs):
-    self.game_name = 'space_invaders'
+    self.game_name = 'SpaceInvaders'
     self.display_time = display_time
     self.init(**kwargs)
 
 
 if __name__ == '__main__':
-  env = Space_invadersEnv()
+  env = SpaceInvadersEnv()
   env.seed(0)
   print('Action space:', env.action_space)
   print('Action set:', env.action_set)
