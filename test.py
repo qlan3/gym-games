@@ -24,8 +24,9 @@ if __name__ == '__main__':
   game = 'Space_invaders-MinAtar-v0'
 
   game = 'NChain-v1'
-  # game = 'LockBernoulli-v0'
-  # game = 'LockGaussian-v0'
+  game = 'LockBernoulli-v0'
+  game = 'LockGaussian-v0'
+  game = 'SparseMountainCar-v0'
 
   env = gym.make(game)
   if game in ['NChain-v1', 'LockBernoulli-v0', 'LockGaussian-v0']:
