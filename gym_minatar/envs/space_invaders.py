@@ -8,7 +8,7 @@ from gym_minatar.envs.base import BaseEnv
 
 class SpaceInvadersEnv(BaseEnv):
   def __init__(self, display_time=50, **kwargs):
-    self.game_name = 'SpaceInvaders'
+    self.game_name = 'space_invaders'
     self.display_time = display_time
     self.init(**kwargs)
 
