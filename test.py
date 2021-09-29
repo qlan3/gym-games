@@ -51,7 +51,7 @@ if __name__ == '__main__':
     for _ in range(10):
       action = env.action_space.sample()
       ob, reward, done, _ = env.step(action)
-      env.render() # default render mode is 'human'
+      # env.render() # default render mode is 'human'
       # env.render('human')
       # img = env.render('rgb_array')
       print('Observation:', ob)
