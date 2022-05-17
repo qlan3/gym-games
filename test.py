@@ -23,6 +23,12 @@ if __name__ == '__main__':
   game = 'Seaquest-MinAtar-v0'
   game = 'SpaceInvaders-MinAtar-v0'
 
+  game = 'Asterix-MinAtar-v1'
+  game = 'Breakout-MinAtar-v1'
+  game = 'Freeway-MinAtar-v1'
+  game = 'Seaquest-MinAtar-v1'
+  game = 'SpaceInvaders-MinAtar-v1'
+
   game = 'NChain-v1'
   game = 'LockBernoulli-v0'
   game = 'LockGaussian-v0'
@@ -33,11 +39,12 @@ if __name__ == '__main__':
     game_cfg = {
       'NChain-v1': {'n':5},
       'LockBernoulli-v0': {'horizon':10, 'dimension':10, 'switch':0.1},
-      'LockGaussian-v0': {'horizon':9, 'dimension':9, 'tabular':False, 'switch':0.1, 'noise':0.1}
+      'LockGaussian-v0': {'horizon':9, 'dimension':9, 'switch':0.1, 'noise':0.1}
     }
     env.init(**game_cfg[game])
   env.seed(0)
 
+  print('Game:', game)
   print('Action space:', env.action_space)
   print('Obsevation space:', env.observation_space)
   try:
@@ -48,7 +55,7 @@ if __name__ == '__main__':
 
   for i in range(1):
     ob = env.reset()
-    for _ in range(10):
+    for _ in range(3):
       action = env.action_space.sample()
       ob, reward, done, _ = env.step(action)
       # env.render() # default render mode is 'human'

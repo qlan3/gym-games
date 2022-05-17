@@ -16,7 +16,7 @@ class BaseEnv(gym.Env):
       self.action_set = self.game.minimal_action_set()
     else:
       self.action_set = list(range(self.game.num_actions()))
-    self.action_space = spaces.Discrete(self.game.num_actions())
+    self.action_space = spaces.Discrete(len(self.action_set))
     self.observation_space = spaces.Box(0.0, 1.0, shape=self.game.state_shape(), dtype=bool)
 
   def step(self, action):
