@@ -17,10 +17,15 @@ For [MinAtar](https://github.com/kenjyoung/MinAtar), the default observation is 
 
 - MinAtar:
   - Asterix-MinAtar-v0
+  - Asterix-MinAtar-v1
   - Breakout-MinAtar-v0
+  - Breakout-MinAtar-v1
   - Freeway-MinAtar-v0
+  - Freeway-MinAtar-v1
   - Seaquest-MinAtar-v0
+  - Seaquest-MinAtar-v1
   - SpaceInvaders-MinAtar-v0
+  - SpaceInvaders-MinAtar-v1
 
 - Exploration games:
   - NChain-v1

@@ -1,6 +1,3 @@
-import os
-import importlib
-import numpy as np
 import gym
 from gym import spaces
 
@@ -10,18 +7,20 @@ from minatar import Environment
 class BaseEnv(gym.Env):
   metadata = {'render.modes': ['human', 'rgb_array']}
 
-  def __init__(self, display_time=50, **kwargs):
-    self.game_name = 'Game Name'
+  def __init__(self, game, display_time=50, use_minimal_action_set=False, **kwargs):
+    self.game_name = game
     self.display_time = display_time
-    self.init(**kwargs)
-    
-  def init(self, **kwargs):
+    self.game_kwargs = kwargs
     self.game = Environment(env_name=self.game_name, **kwargs)
-    self.action_set = self.game.env.action_map
+    if use_minimal_action_set:
+      self.action_set = self.game.minimal_action_set()
+    else:
+      self.action_set = list(range(self.game.num_actions()))
     self.action_space = spaces.Discrete(self.game.num_actions())
-    self.observation_space = spaces.Box(0.0, 1.0, shape=self.game.state_shape(), dtype=np.float32)
+    self.observation_space = spaces.Box(0.0, 1.0, shape=self.game.state_shape(), dtype=bool)
 
   def step(self, action):
+    action = self.action_set[action]
     reward, done = self.game.act(action)
     return (self.game.state(), reward, done, {})
     
@@ -30,7 +29,11 @@ class BaseEnv(gym.Env):
     return self.game.state()
   
   def seed(self, seed=None):
-    self.game = Environment(env_name=self.game_name, random_seed=seed)
+    self.game = Environment(
+      env_name=self.game_name,
+      random_seed=seed,
+      **self.game_kwargs
+    )
     return seed
 
   def render(self, mode='human'):
