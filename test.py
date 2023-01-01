@@ -33,13 +33,15 @@ if __name__ == '__main__':
   game = 'LockBernoulli-v0'
   game = 'LockGaussian-v0'
   game = 'SparseMountainCar-v0'
+  game = 'DiabolicalCombLock-v0'
 
   env = gym.make(game)
-  if game in ['NChain-v1', 'LockBernoulli-v0', 'LockGaussian-v0']:
+  if game in ['NChain-v1', 'LockBernoulli-v0', 'LockGaussian-v0', 'DiabolicalCombLock-v0']:
     game_cfg = {
       'NChain-v1': {'n':5},
       'LockBernoulli-v0': {'horizon':10, 'dimension':10, 'switch':0.1},
-      'LockGaussian-v0': {'horizon':9, 'dimension':9, 'switch':0.1, 'noise':0.1}
+      'LockGaussian-v0': {'horizon':9, 'dimension':9, 'switch':0.1, 'noise':0.1},
+      'DiabolicalCombLock-v0': {"horizon":5, "swap":0.5}
     }
     env.init(**game_cfg[game])
   env.seed(0)
