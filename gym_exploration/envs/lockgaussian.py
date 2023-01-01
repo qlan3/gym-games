@@ -6,26 +6,26 @@ from gym_exploration.envs.lockbernoulli import LockBernoulliEnv
 
 
 class LockGaussianEnv(LockBernoulliEnv):
-    ''' A (stochastic) combination lock environment
-    The feature vector is hit with a random rotation and augmented with gaussian noise:
-        x = s + eps where s is the one-hot encoding of the state.
-    You may configure the length, dimension, and switching probability.
-    Check [Provably efficient RL with Rich Observations via Latent State Decoding](https://arxiv.org/pdf/1901.09018.pdf) for a detailed description.
-    '''
-    def __init__(self):
-        super().__init__()
+  ''' A (stochastic) combination lock environment
+  The feature vector is hit with a random rotation and augmented with gaussian noise:
+      x = s + eps where s is the one-hot encoding of the state.
+  You may configure the length, dimension, and switching probability.
+  Check [Provably efficient RL with Rich Observations via Latent State Decoding](https://arxiv.org/pdf/1901.09018.pdf) for a detailed description.
+  '''
+  def __init__(self):
+    super().__init__()
 
-    def init(self, dimension=0, switch=0.0, noise=0.0, horizon=2):
-        super().init(horizon=horizon, dimension=dimension, switch=switch)
-        self.noise = noise
+  def init(self, dimension=0, switch=0.0, noise=0.0, horizon=2):
+    super().init(horizon=horizon, dimension=dimension, switch=switch)
+    self.noise = noise
 
-    def make_obs(self, s):
-      if self.noise > 0:
-        new_x = np.random.normal(0, self.noise, [self.n])
-      else:
-        new_x = np.zeros((self.n,))
-      new_x[s] += 1
-      return new_x
+  def make_obs(self, s):
+    if self.noise > 0:
+      new_x = np.random.normal(0, self.noise, [self.n])
+    else:
+      new_x = np.zeros((self.n,))
+    new_x[s] += 1
+    return new_x
 
 
 if __name__ == '__main__':

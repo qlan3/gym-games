@@ -32,6 +32,7 @@ For [MinAtar](https://github.com/kenjyoung/MinAtar), the default observation is 
   - LockBernoulli-v0
   - LockGaussian-v0
   - SparseMountainCar-v0
+  - DiabolicalCombLock-v0
 
 ## Installation
 

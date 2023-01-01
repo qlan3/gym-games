@@ -83,7 +83,7 @@ class LockBernoulliEnv(gym.Env):
     self.opt_a = self.np_random.randint(low=0, high=self.action_space.n, size=self.horizon)
     self.opt_b = self.np_random.randint(low=0, high=self.action_space.n, size=self.horizon)
     if hasattr(gym.spaces, 'prng'):
-        gym.spaces.prng.seed(seed)
+      gym.spaces.prng.seed(seed)
     return seed
 
   def close(self):
