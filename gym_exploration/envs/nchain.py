@@ -20,8 +20,7 @@ class NChainEnv(gym.Env):
     
   def init(self, n=10):
     self.n = n
-    self.observation_space = spaces.Discrete(self.n)
-    setattr(self.observation_space, 'n', self.n)
+    self.observation_space = spaces.Box(low=0.0, high=1.0, shape=(self.n,), dtype=np.float32)
     self.max_steps = n+8
   
   def reward(self, s, a):
@@ -48,7 +47,7 @@ class NChainEnv(gym.Env):
       is_done = True
     else:
       is_done = False
-    return (v <= self.state).astype('float32'), r, is_done, None
+    return (v <= self.state).astype('float32'), r, is_done, {}
 
   def reset(self):
     v = np.arange(self.n)
@@ -71,14 +70,15 @@ if __name__ == '__main__':
   env = NChainEnv()
   env.seed(0)
   print('Action space:', env.action_space)
-  print('n:', env.n)
   print('Obsevation space:', env.observation_space)
-  print('Obsevation space n:', env.observation_space.n)
+  print('Obsevation space high:', env.observation_space.high)
+  print('Obsevation space low:', env.observation_space.low)
+
   cfg = {'n':5}
   env.init(**cfg)
-  print('New n:', env.n)
   print('New obsevation space:', env.observation_space)
-  print('New obsevation space n:', env.observation_space.n)
+  print('New Obsevation space high:', env.observation_space.high)
+  print('New Obsevation space low:', env.observation_space.low)
   
   for i in range(1):
     ob = env.reset()
