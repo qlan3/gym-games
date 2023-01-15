@@ -10,8 +10,8 @@ class LockBernoulliEnv(gym.Env):
   You may configure the length, dimension, and switching probability.
   Check [Provably efficient RL with Rich Observations via Latent State Decoding](https://arxiv.org/pdf/1901.09018.pdf) for a detailed description.
   '''
-  def __init__(self):
-    self.init()
+  def __init__(self, dimension=0, switch=0.0, horizon=2):
+    self.init(dimension, switch, horizon)
 
   def init(self, dimension=0, switch=0.0, horizon=2):
     self.dimension = dimension

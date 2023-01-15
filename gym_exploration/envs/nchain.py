@@ -12,11 +12,11 @@ class NChainEnv(gym.Env):
   In state s1, the agent receives a small reward of r = 0.001 and a larger reward r = 1 in state sN.
   Check [Deep Exploration via Bootstrapped DQN](https://papers.nips.cc/paper/6501-deep-exploration-via-bootstrapped-dqn.pdf) for a detailed description.
   '''
-  def __init__(self):
+  def __init__(self, n=10):
     self.state = 1  # Start at state s2
     self.action_space = spaces.Discrete(2)
     self.seed()
-    self.init()
+    self.init(n)
     
   def init(self, n=10):
     self.n = n
