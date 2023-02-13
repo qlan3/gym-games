@@ -18,7 +18,7 @@ setup(
   python_requires='>=3.5',
   install_requires=[
     'numpy>=1.16.4',
-    'MinAtar>=1.0.4',
+    'MinAtar>=1.0.10',
     'gym>=0.13.0',
     'setuptools>=41.0.1',
     'pygame>=1.9.6',
