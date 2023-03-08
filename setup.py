@@ -20,7 +20,7 @@ setup(
     'numpy>=1.16.4',
     'MinAtar>=1.0.10',
     'gym>=0.13.0',
-    'setuptools>=41.0.1',
+    'setuptools>=65.5.1',
     'pygame>=1.9.6',
     'ple>=0.0.1'
   ],
