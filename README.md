@@ -60,7 +60,7 @@ Please read the instruction [here](https://github.com/openai/gym).
 
 ## MinAtar
 
-    pip install git+https://github.com/kenjyoung/MinAtar.git
+    pip install minatar==1.0.10
 
 ### Gym-games
 
