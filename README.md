@@ -85,8 +85,9 @@ Please use this bibtex to cite this repo:
 
 ## References
 
-- [gym](https://github.com/openai/gym/tree/master/)
+- [gym](https://github.com/openai/gym/)
 - [gym-ple](https://github.com/lusob/gym-ple)
 - [SRNN](https://github.com/VincentLiu3/SRNN)
 - [MinAtar](https://github.com/kenjyoung/MinAtar)
 - [Latent State Decoding](https://github.com/microsoft/StateDecoding)
+- [Gymnasium](https://github.com/Farama-Foundation/Gymnasium)
