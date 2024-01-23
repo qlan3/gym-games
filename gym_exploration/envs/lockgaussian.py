@@ -1,11 +1,10 @@
-import gym
 import numpy as np
-from gym.spaces import MultiBinary, Discrete, Box
 
-from gym_exploration.envs.lockbernoulli import LockBernoulliEnv
+import gymnasium as gym
+from gymnasium import spaces
 
 
-class LockGaussianEnv(LockBernoulliEnv):
+class LockGaussianEnv(gym.Env):
   ''' A (stochastic) combination lock environment
   The feature vector is hit with a random rotation and augmented with gaussian noise:
       x = s + eps where s is the one-hot encoding of the state.
@@ -16,34 +15,106 @@ class LockGaussianEnv(LockBernoulliEnv):
     self.init(dimension, switch, noise, horizon)
 
   def init(self, dimension=0, switch=0.0, noise=0.0, horizon=2):
-    super().init(horizon=horizon, dimension=dimension, switch=switch)
+    self.dimension = dimension
+    self.switch = switch
+    self.horizon = horizon
+    self.n = self.dimension+3
+    self.observation_space = spaces.Box(low=-np.inf, high=np.inf, shape=(self.n,), dtype=np.float32)
+    self.action_space = spaces.Discrete(4)
     self.noise = noise
 
-  def make_obs(self, s):
+  def _get_obs(self, s):
     if self.noise > 0:
-      new_x = np.random.normal(0, self.noise, [self.n])
+      new_x = self.np_random.normal(0, self.noise, [self.n])
     else:
       new_x = np.zeros((self.n,))
     new_x[s] += 1
-    return new_x
+    return np.array(new_x, dtype=np.float32)
+
+  def reset(self, seed=None, options=None):
+    # We need the following line to seed self.np_random
+    super().reset(seed=seed)
+    if seed is not None:
+      self.opt_a = self.np_random.integers(low=0, high=self.action_space.n, size=self.horizon, dtype=np.uint8)
+      self.opt_b = self.np_random.integers(low=0, high=self.action_space.n, size=self.horizon, dtype=np.uint8)  
+    self.h = 0
+    self.state = 0
+    obs = self._get_obs(self.state)
+    return obs, {}
+
+  def step(self, action):
+    assert self.h < self.horizon, 'Exceeded horizon!'
+    if self.h == self.horizon-1:
+      terminated = True
+      r = self.np_random.binomial(1, 0.5)
+      if self.state == 0 and action == self.opt_a[self.h]:
+        next_state = 0
+      elif self.state == 0 and action == (self.opt_a[self.h]+1) % 4:
+        next_state = 1
+      elif self.state == 1 and action == self.opt_b[self.h]:
+        next_state = 1
+      elif self.state == 1 and action == (self.opt_b[self.h]+1) % 4:
+        next_state = 0
+      else:
+        next_state, r = 2, 0
+    else:
+      r = 0
+      terminated = False
+      ber = self.np_random.binomial(1, self.switch)
+      if self.state == 0: # state A
+        if action == self.opt_a[self.h]:
+          next_state = ber
+        elif action == (self.opt_a[self.h]+1) % 4:
+          next_state = 1 - ber
+        else:
+          next_state = 2
+      elif self.state == 1: # state B
+        if action == self.opt_b[self.h]:
+          next_state = 1 - ber
+        elif action == (self.opt_b[self.h]+1) % 4:
+          next_state = ber
+        else:
+          next_state = 2
+      else: # state C
+        next_state = 2
+
+    self.h += 1
+    self.state = next_state
+    obs = self._get_obs(self.state)
+    return obs, r, terminated, False, {}
+
+  def render(self, mode="human"):
+    print(f'{chr(self.state+65)}{self.h}')
+
+  def close(self):
+    return None
 
 
 if __name__ == '__main__':
+  seed = 4
   env = LockGaussianEnv()
-  env.seed(0)
+  env_cfg = {"horizon":10, "dimension":10, "switch":0.1}
+  env.init(**env_cfg)
+  obs, info = env.reset(seed)
+  env.action_space.seed(seed)
+  env.observation_space.seed(seed)
+
   print('Action space:', env.action_space)
   print('Obsevation space:', env.observation_space)
   print('Obsevation space high:', env.observation_space.high)
   print('Obsevation space low:', env.observation_space.low)
 
-  for i in range(1):
-    ob = env.reset()
+  for i in range(2):
+    obs, info = env.reset(i)
+    env.action_space.seed(i)
+    env.observation_space.seed(i)
     while True:
       action = env.action_space.sample()
-      ob, reward, done, _ = env.step(action)
-      print('Observation:', ob)
+      obs, reward, terminated, _, _ = env.step(action)
+      print('Observation:', obs)
+      print('action:', action)
       print('Reward:', reward)
-      print('Done:', done)
-      if done:
+      print('Done:', terminated)
+      if terminated:
         break
   env.close()

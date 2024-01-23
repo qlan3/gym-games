@@ -1,6 +1,8 @@
+gymnasium==0.28.1
+MinAtar==1.0.15
+numpy==1.26.3
 ple.egg==info
-setuptools>=65.5.1
-MinAtar==1.0.10
-numpy==1.22.3
-gym==0.23.1
-pygame==1.9.6
+pyglet==2.0.10
+seaborn==0.13.1
+setuptools>=69.0.3
+pygame==2.5.2

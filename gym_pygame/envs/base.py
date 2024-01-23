@@ -1,13 +1,14 @@
 import os
 import importlib
 import numpy as np
-import gym
-from gym import spaces
 from ple import PLE
+
+import gymnasium as gym
+from gymnasium import spaces
 
 
 class BaseEnv(gym.Env):
-  metadata = {'render.modes': ['human', 'rgb_array']}
+  metadata = {"render_modes": ["human", "array", "rgb_array"]}
 
   def __init__(self, normalize=False, display=False, **kwargs):
     self.game_name = 'Game Name'
@@ -35,24 +36,22 @@ class BaseEnv(gym.Env):
     self.gameOb.init()
 
   def get_ob(self, state):
-    return np.array(list(state.values()))
+    return np.array(list(state.values()), dtype=np.float32)
 
   def get_ob_normalize(self, state):
     raise NotImplementedError('Get observation normalize function is not implemented!')
+    
+  def reset(self, seed=None, options=None):
+    if seed is not None:
+      self.gameOb.rng.seed(seed)
+      self.gameOb.init()
+    self.gameOb.reset_game()
+    return self.gameOb.getGameState(), {}
 
   def step(self, action):
     reward = self.gameOb.act(self.action_set[action])
-    done = self.gameOb.game_over()
-    return (self.gameOb.getGameState(), reward, done, {})
-    
-  def reset(self):
-    self.gameOb.reset_game()
-    return self.gameOb.getGameState()
-  
-  def seed(self, seed=None):
-    self.gameOb.rng.seed(seed)
-    self.gameOb.init()
-    return seed
+    terminated = self.gameOb.game_over()
+    return self.gameOb.getGameState(), reward, terminated, False, {}
 
   def render(self, mode='human'):
     # img = self.gameOb.getScreenRGB() 
@@ -61,7 +60,7 @@ class BaseEnv(gym.Env):
     if mode == 'rgb_array':
       return img
     elif mode == 'human':
-      from gym.envs.classic_control import rendering
+      from gym_pygame.envs import rendering
       if self.viewer is None:
         self.viewer = rendering.SimpleImageViewer()
       self.viewer.imshow(img)

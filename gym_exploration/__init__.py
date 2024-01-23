@@ -1,4 +1,4 @@
-from gym.envs.registration import register
+from gymnasium.envs.registration import register
 
 for game in ['LockBernoulli', 'LockGaussian', 'SparseMountainCar', 'DiabolicalCombLock']:
   register(

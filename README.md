@@ -1,6 +1,6 @@
 # Gym Games
 
-This is a gym compatible version of various games for reinforcement learning.
+This is a Gymnasium compatible version of various games for reinforcement learning.
 
 For [PyGame Learning Environment](https://pygame-learning-environment.readthedocs.io/en/latest/user/games.html), the default observation is a non-visual state representation of the game. 
 
@@ -16,15 +16,10 @@ For [MinAtar](https://github.com/kenjyoung/MinAtar), the default observation is 
   - Pong-PLE-v0
 
 - MinAtar:
-  - Asterix-MinAtar-v0
   - Asterix-MinAtar-v1
-  - Breakout-MinAtar-v0
   - Breakout-MinAtar-v1
-  - Freeway-MinAtar-v0
   - Freeway-MinAtar-v1
-  - Seaquest-MinAtar-v0
   - Seaquest-MinAtar-v1
-  - SpaceInvaders-MinAtar-v0
   - SpaceInvaders-MinAtar-v1
 
 - Exploration games:
@@ -36,31 +31,33 @@ For [MinAtar](https://github.com/kenjyoung/MinAtar), the default observation is 
 
 ## Installation
 
-### Gym
+### Gymnasium
 
-Please read the instruction [here](https://github.com/openai/gym).
+Please read the instruction [here](https://github.com/Farama-Foundation/Gymnasium).
 
 ### Pygame
 
 - On OSX:
 
       brew install sdl sdl_ttf sdl_image sdl_mixer portmidi
-      pip install pygame==1.9.6
+      pip install pygame==2.5.2
 
 - On Ubuntu:
 
       sudo apt-get -y install python-pygame
-      pip install pygame==1.9.6
+      pip install pygame==2.5.2
 
 - Others: Please read the instruction [here](http://www.pygame.org/wiki/GettingStarted#Pygame%20Installation).
 
 ### PyGame Learning Environment
 
-    pip install git+https://github.com/ntasfi/PyGame-Learning-Environment.git
+    git clone https://github.com/ntasfi/PyGame-Learning-Environment.git
+    cd PyGame-Learning-Environment/
+    pip install -e .
 
 ## MinAtar
 
-    pip install minatar==1.0.10
+    pip install minatar==1.0.15
 
 ### Gym-games
 

@@ -1,7 +1,7 @@
-import gym
 import numpy as np
-from gym.utils import seeding
-from gym.spaces import MultiBinary, Discrete, Box
+
+import gymnasium as gym
+from gymnasium import spaces
 
 
 # Adapted from https://raw.githubusercontent.com/microsoft/StateDecoding/master/LockBernoulli.py
@@ -18,26 +18,30 @@ class LockBernoulliEnv(gym.Env):
     self.switch = switch
     self.horizon = horizon
     self.n = self.dimension+3
-    self.observation_space = Box(low=0.0, high=1.0, shape=(self.n,), dtype=np.float32)
-    self.action_space = Discrete(4)
-    self.seed()
+    self.observation_space = spaces.Box(low=0, high=1, shape=(self.n,), dtype=np.uint8)
+    self.action_space = spaces.Discrete(4)
 
-  def reset(self):
-    self.h = 0
-    self.state = 0
-    obs = self.make_obs(self.state)
-    return (obs)
-
-  def make_obs(self, s):
-    new_x = np.zeros((self.n,))
+  def _get_obs(self, s):
+    new_x = np.zeros((self.n,), dtype=np.uint8)
     new_x[s] = 1
     new_x[3:] = self.np_random.binomial(1, 0.5, (self.dimension,))
     return new_x
 
-  def step(self,action):
+  def reset(self, seed=None, options=None):
+    # We need the following line to seed self.np_random
+    super().reset(seed=seed)
+    if seed is not None:
+      self.opt_a = self.np_random.integers(low=0, high=self.action_space.n, size=self.horizon, dtype=np.uint8)
+      self.opt_b = self.np_random.integers(low=0, high=self.action_space.n, size=self.horizon, dtype=np.uint8)  
+    self.h = 0
+    self.state = 0
+    obs = self._get_obs(self.state)
+    return obs, {}
+
+  def step(self, action):
     assert self.h < self.horizon, 'Exceeded horizon!'
     if self.h == self.horizon-1:
-      done = True
+      terminated = True
       r = self.np_random.binomial(1, 0.5)
       if self.state == 0 and action == self.opt_a[self.h]:
         next_state = 0
@@ -51,7 +55,7 @@ class LockBernoulliEnv(gym.Env):
         next_state, r = 2, 0
     else:
       r = 0
-      done = False
+      terminated = False
       ber = self.np_random.binomial(1, self.switch)
       if self.state == 0: # state A
         if action == self.opt_a[self.h]:
@@ -72,46 +76,41 @@ class LockBernoulliEnv(gym.Env):
 
     self.h += 1
     self.state = next_state
-    obs = self.make_obs(self.state)
-    return obs, r, done, {}
+    obs = self._get_obs(self.state)
+    return obs, r, terminated, False, {}
 
-  def render(self, mode='human'):
+  def render(self, mode="human"):
     print(f'{chr(self.state+65)}{self.h}')
 
-  def seed(self, seed=None):
-    self.np_random, seed = seeding.np_random(seed)
-    self.opt_a = self.np_random.randint(low=0, high=self.action_space.n, size=self.horizon)
-    self.opt_b = self.np_random.randint(low=0, high=self.action_space.n, size=self.horizon)
-    if hasattr(gym.spaces, 'prng'):
-      gym.spaces.prng.seed(seed)
-    return seed
-
   def close(self):
-    return 0
+    return None
 
 
 if __name__ == '__main__':
+  seed = 4
   env = LockBernoulliEnv()
-  env.seed(0)
   env_cfg = {"horizon":10, "dimension":10, "switch":0.1}
   env.init(**env_cfg)
+  obs, info = env.reset(seed)
+  env.action_space.seed(seed)
+  env.observation_space.seed(seed)
+
   print('Action space:', env.action_space)
   print('Obsevation space:', env.observation_space)
-  try:
-    print('Obsevation space high:', env.observation_space.high)
-    print('Obsevation space low:', env.observation_space.low)
-  except:
-    pass
+  print('Obsevation space high:', env.observation_space.high)
+  print('Obsevation space low:', env.observation_space.low)
 
-  for i in range(1):
-    ob = env.reset()
-    print('Observation:', ob)
+  for i in range(2):
+    obs, info = env.reset(i)
+    env.action_space.seed(i)
+    env.observation_space.seed(i)
     while True:
       action = env.action_space.sample()
-      ob, reward, done, _ = env.step(action)
-      print('Observation:', ob)
+      obs, reward, terminated, _, _ = env.step(action)
+      print('Observation:', obs)
+      print('action:', action)
       print('Reward:', reward)
-      print('Done:', done)
-      if done:
+      print('Done:', terminated)
+      if terminated:
         break
   env.close()

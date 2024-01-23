@@ -1,7 +1,7 @@
-import gym
-from gym import spaces
 import numpy as np
-from gym.utils import seeding
+
+import gymnasium as gym
+from gymnasium import spaces
 
 
 # Adapted from https://github.com/facebookresearch/RandomizedValueFunctions/blob/master/qlearn/envs/nchain.py
@@ -15,18 +15,28 @@ class NChainEnv(gym.Env):
   def __init__(self, n=10):
     self.state = 1  # Start at state s2
     self.action_space = spaces.Discrete(2)
-    self.seed()
     self.init(n)
     
   def init(self, n=10):
     self.n = n
-    self.observation_space = spaces.Box(low=0.0, high=1.0, shape=(self.n,), dtype=np.float32)
+    self.observation_space = spaces.Box(low=0, high=1, shape=(self.n,), dtype=np.uint8)
     self.max_steps = n+8
   
+  def _get_obs(self, v):
+    return (v <= self.state).astype(np.uint8)
+
+  def reset(self, seed=None, options=None):
+    # We need the following line to seed self.np_random
+    super().reset(seed=seed)
+    v = np.arange(self.n)
+    self.state = 1
+    self.steps = 0
+    return self._get_obs(v), {}
+  
   def reward(self, s, a):
-    if s == self.n-1 and a==1:
+    if s == self.n-1 and a == 1:
       return 1.0  
-    elif s==0 and a==0:
+    elif s == 0 and a == 0:
       return 0.001
     else:
       return 0
@@ -44,31 +54,21 @@ class NChainEnv(gym.Env):
         self.state -= 1
     self.steps += 1
     if self.steps >= self.max_steps:
-      is_done = True
+      terminated = True
     else:
-      is_done = False
-    return (v <= self.state).astype('float32'), r, is_done, {}
+      terminated = False
+    return self._get_obs(v), r, terminated, False, {}
 
-  def reset(self):
-    v = np.arange(self.n)
-    self.state = 1
-    self.steps = 0
-    return (v <= self.state).astype('float32')
-  
-  def seed(self, seed=None):
-    self.np_random, seed = seeding.np_random(seed)
-    return seed
-
-  def render(self, mode='human'):
+  def render(self, mode="human"):
     pass
 
   def close(self):
-    return 0
+    return None
   
 
 if __name__ == '__main__':
+  seed = 4
   env = NChainEnv()
-  env.seed(0)
   print('Action space:', env.action_space)
   print('Obsevation space:', env.observation_space)
   print('Obsevation space high:', env.observation_space.high)
@@ -80,14 +80,17 @@ if __name__ == '__main__':
   print('New Obsevation space high:', env.observation_space.high)
   print('New Obsevation space low:', env.observation_space.low)
   
-  for i in range(1):
-    ob = env.reset()
+  for i in range(2):
+    obs, info = env.reset(i)
+    env.action_space.seed(i)
+    env.observation_space.seed(i)
     while True:
       action = env.action_space.sample()
-      ob, reward, done, _ = env.step(action)
-      print('Observation:', ob)
+      obs, reward, terminated, _, _ = env.step(action)
+      print('Observation:', obs)
+      print('action:', action)
       print('Reward:', reward)
-      print('Done:', done)
-      if done:
+      print('Done:', terminated)
+      if terminated:
         break
   env.close()
