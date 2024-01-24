@@ -18,7 +18,7 @@ setup(
   python_requires='>=3.7',
   install_requires=[
     'MinAtar==1.0.15',
-    'gymnasium==0.28.1',
+    'gymnasium>=0.28.1,<0.30',
     'setuptools>=69.0.3',
     'pygame==2.5.2',
     'ple==0.0.1'
