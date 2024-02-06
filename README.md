@@ -2,6 +2,9 @@
 
 This is a Gymnasium compatible version of various games for reinforcement learning.
 
+> [!NOTE]
+> For Gym compatible version, please check [v1.0.4](https://github.com/qlan3/gym-games/releases/tag/v1.0.4).
+
 For [PyGame Learning Environment](https://pygame-learning-environment.readthedocs.io/en/latest/user/games.html), the default observation is a non-visual state representation of the game. 
 
 For [MinAtar](https://github.com/kenjyoung/MinAtar), the default observation is a visual input of the game.
