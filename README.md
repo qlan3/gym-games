@@ -1,6 +1,6 @@
 # Gym Games
 
-This is a Gymnasium compatible version of various games for reinforcement learning.
+This is a collection of Gymnasium compatible games for reinforcement learning.
 
 > [!NOTE]
 > For Gym compatible version, please check [v1.0.4](https://github.com/qlan3/gym-games/releases/tag/v1.0.4).
