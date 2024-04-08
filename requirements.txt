@@ -1,6 +1,6 @@
 pygame==2.5.2
 MinAtar==1.0.15
-gymnasium>=0.28.1,<0.30
+gymnasium>=0.28.1
 numpy>=1.26.3
 ple.egg==info
 pyglet>=2.0.10
