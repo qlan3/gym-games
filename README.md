@@ -40,9 +40,9 @@ Please read the instruction [here](https://github.com/Farama-Foundation/Gymnasiu
 
 ### Pygame
 
-- On OSX:
+- On OSX: See [here](https://www.pygame.org/wiki/MacCompile) for more details.
 
-      brew install sdl sdl_ttf sdl_image sdl_mixer portmidi
+      brew install sdl2 sdl2_image sdl2_mixer sdl2_ttf pkg-config
       pip install pygame==2.5.2
 
 - On Ubuntu:
